@@ -6,6 +6,7 @@ import { projectBySlugQuery } from '@/sanity/queries'
 import { Project } from '@/sanity/types'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/client'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 // Loading skeleton component that shows LQIP blurred image
 const ImageSkeleton = ({ 
@@ -45,7 +46,7 @@ interface ProjectModalProps {
   isClosing: boolean
 }
 
-export default function ProjectModal({ isOpen, onClose, projectSlug, slideDirection, isAnimating, isClosing }: ProjectModalProps) {
+export default function ProjectModal({ isOpen, onClose, projectSlug, slideDirection, isClosing }: ProjectModalProps) {
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(false)
   const [imageLoadingStates, setImageLoadingStates] = useState<Record<string, boolean>>({})
@@ -100,7 +101,7 @@ export default function ProjectModal({ isOpen, onClose, projectSlug, slideDirect
           }
           
           if (data.images) {
-            data.images.forEach((image: any, index: number) => {
+            data.images.forEach((image: SanityImageSource | { _type: 'video'; url: string; caption?: string }, index: number) => {
               if (typeof image === 'object' && '_type' in image && image._type === 'video') {
                 // For videos, we'll get dimensions when they load
               } else {
@@ -129,7 +130,7 @@ export default function ProjectModal({ isOpen, onClose, projectSlug, slideDirect
           if (data.coverImage) loadingStates['cover'] = true
           if (data.secondCoverImage) loadingStates['secondCover'] = true
           if (data.images) {
-            data.images.forEach((_: any, index: number) => {
+            data.images.forEach((_image: SanityImageSource | { _type: 'video'; url: string; caption?: string }, index: number) => {
               loadingStates[`image-${index}`] = true
             })
           }

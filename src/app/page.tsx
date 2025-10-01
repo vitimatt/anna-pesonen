@@ -15,7 +15,6 @@ export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalProjectSlug, setModalProjectSlug] = useState<string | null>(null)
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right')
-  const [isAnimating, setIsAnimating] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [hoverDirection, setHoverDirection] = useState<'left' | 'right' | null>(null)
   const [isHovering, setIsHovering] = useState(false)
