@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anna Pesonen Archive
 
-## Getting Started
+A Next.js site with Sanity CMS for Anna Pesonen's stylist archive.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Access Sanity Studio:
+   - Visit `http://localhost:3000/studio` to manage content
+   - Or run `npm run studio` for standalone studio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+- **Sanity Studio**: Available at `/studio` route
+- **Pages**:
+  - `/` - Landing page
+  - `/projects` - List of all projects
+  - `/projects/[slug]` - Individual project pages
 
-To learn more about Next.js, take a look at the following resources:
+## Sanity Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The `Project` schema includes:
+- `title` (string)
+- `slug` (slug, auto-generated from title)
+- `type` (string)
+- `tags` (array: Styling, Consulting, Creative Direction)
+- `location` (string)
+- `season` (string)
+- `year` (number)
+- `coverImage` (image)
+- `images` (array of images and videos)
+  - Images: standard image uploads
+  - Videos: objects with `url` (string) and `caption` (string)
+- `creativeDirector` (string)
+- `otherRoles` (array of objects with roleTitle and roleName)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+The site is set up with:
+- Next.js 15 with App Router
+- TypeScript
+- Tailwind CSS
+- Sanity CMS integration
+- GROQ queries for data fetching
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All pages are currently blank templates ready for design implementation.
